@@ -15,7 +15,10 @@
     "mocha_reporter": "dot"
   },
   "scripts": {
-    "clean": "rm -rf generated dist lib coverage && yarn run clean:dist",
+    "invalidVarChars": "printenv | grep -e ^npm_package_browser_ -e ^npm_package_dependencies_stringify -e ^npm_package_scripts_clean | sort",
+    "license": "printenv | grep -e ^npm_package_license | sort",
+    "directories": "printenv | grep -e ^npm_package_dir",
+    "repository": "printenv | grep -e ^npm_package_repository",
     "clean:dist": "git checkout -- dist",
     "compile:browser": "browserify src/testdouble.js --standalone td --outfile $npm_package_config_build_file -p headerify -t babelify",
     "compile:browser:test": "mkdir -p generated && browserify test/browser-helper.js --outfile $npm_package_config_test_bundle -t babelify -t coffeeify --extension=\".coffee\" -t require-globify --ignore-missing",
@@ -47,8 +50,7 @@
     ]
   },
   "browser": {
-    "./lib/replace/module.js": "./lib/replace/module.browser.js",
-    "quibble": "./lib/quibble.browser.js"
+    "./lib/replace/module.js": "./lib/replace/module.browser.js"
   },
   "standard": {
     "globals": [
@@ -104,10 +106,7 @@
   "bugs": {
     "url": "https://github.com/testdouble/testdouble.js/issues"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/testdouble/testdouble.js.git"
-  },
+  "repository": "https://github.com/testdouble/testdouble.js.git",
   "license": "MIT",
   "engines": {
     "node": ">= 4.0.0"
